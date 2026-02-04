@@ -456,16 +456,13 @@ body.is-contact #contact-phone {
     overflow: auto !important;
   }
 
-  .fallback{
-    display: flex;          /* 既に display:block 指定があっても上書きOK */
-    flex-direction: column;
-  }
-
-  .fallback iframe{
+  .fallback { display:block; }
+  
+  .fallback__iframe{
     width: 100%;
+    height: 100svh;
     border: 0;
     display: block;
-    overflow: hidden;
   }
 }
 

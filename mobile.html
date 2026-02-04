@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/inside.css" />
+    <link rel="stylesheet" href="./css/contact-form.css" />
+    <title>倒置のデザイン</title>
+  </head>
+  <body>
+    <header class="top">
+      <h1 class="logo">倒置のデザイン</h1>
+    </header>
+
+    <main class="main">
+      <section id="pickup">
+        <h2>Pickup!</h2>
+        <div id="pickupGrid"></div>
+      </section>
+
+      <section id="works">
+        <h2>Works</h2>
+        <div id="worksGrid" class="grid"></div>
+      </section>
+
+      <!-- ★ここに contact-form.html の <form> 周り（必要な部分）を貼る -->
+      <section id="contact">
+        <h2>Contact</h2>
+        <main class="phone-form">
+          <header class="phone-form__header">
+            <p class="phone-form__eyebrow">Contact</p>
+            <h1 class="phone-form__title">ご依頼フォーム</h1>
+            <p class="phone-form__annotation">
+              *が付いているものは必須項目です
+            </p>
+          </header>
+          <button
+            onclick="window.open('https://x.com/tochi2718')"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="phone-form__X"
+          >
+            <p>XのDMにてご依頼されたい方はこちら</p>
+          </button>
+          <form
+            class="form"
+            id="contactForm"
+            action="https://formspree-to-discord.toch2718.workers.dev/formspree"
+            method="post"
+            autocomplete="off"
+            novalidate
+          >
+            <div class="edit" id="editPanel">
+              <label class="field">
+                <span class="field__label"
+                  >お名前<span class="asterisk">*</span></span
+                >
+                <input class="field__input" name="name" type="text" required />
+              </label>
+
+              <label class="field">
+                <span class="field__label"
+                  >メール<span class="asterisk">*</span></span
+                >
+                <input
+                  class="field__input"
+                  name="email"
+                  type="email"
+                  required
+                />
+              </label>
+
+              <label class="field">
+                <span class="field__label"
+                  >種別<span class="asterisk">*</span></span
+                >
+                <select class="field__select" name="type" required>
+                  <option value="">選択してください</option>
+                  <option value="logo">ロゴ</option>
+                  <option value="kv">キービジュアル</option>
+                  <option value="web">Web</option>
+                  <option value="print">紙もの</option>
+                  <option value="other">その他</option>
+                </select>
+              </label>
+
+              <div class="row">
+                <label class="field">
+                  <span class="field__label">ご予算（目安）</span>
+                  <input
+                    class="field__input"
+                    name="budget"
+                    type="text"
+                    inputmode="numeric"
+                  />
+                </label>
+
+                <label class="field">
+                  <span class="field__label">希望納期</span>
+                  <input
+                    class="field__input"
+                    name="deadline"
+                    type="text"
+                    placeholder="例：2月末"
+                  />
+                </label>
+              </div>
+
+              <label class="field">
+                <span class="field__label"
+                  >概要<span class="asterisk">*</span></span
+                >
+                <textarea
+                  class="field__textarea"
+                  name="message"
+                  rows="5"
+                  required
+                ></textarea>
+              </label>
+
+              <p
+                class="form-error"
+                id="formError"
+                role="alert"
+                aria-live="polite"
+              ></p>
+
+              <button class="submit" type="button" id="confirmBtn">
+                確認へ
+              </button>
+            </div>
+
+            <section class="confirm" id="confirmPanel" aria-live="polite">
+              <h2 class="confirm__title">入力内容の確認</h2>
+              <dl class="confirm__list" id="confirmList"></dl>
+
+              <div class="actions">
+                <button class="ghost" type="button" id="backToEditBtn">
+                  修正する
+                </button>
+                <button class="submit" type="submit" id="sendBtn">送信</button>
+              </div>
+            </section>
+            <section class="done" id="donePanel" aria-live="polite">
+              <h2 class="confirm__title">送信しました</h2>
+              <p class="done__text">内容を確認のうえ、ご連絡します。</p>
+              <button class="ghost" type="button" id="backToSiteBtn">
+                戻る
+              </button>
+            </section>
+          </form>
+        </main>
+        <script src="./js/contact-form.js"></script>
+      </section>
+    </main>
+    <script type="module" src="js/works-list.js"></script>
+  </body>
+</html>
