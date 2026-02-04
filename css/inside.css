@@ -118,6 +118,8 @@ main.main {
   cursor: pointer;
   border: none;
   background-color: transparent;
+  display: flex;
+  flex-direction: column;
 }
 
 #works #worksGrid .workCard:focus-visible {
@@ -148,4 +150,32 @@ main.main {
   font-size: 16px;
   margin-top: 6px;
   font-weight: 400;
+}
+
+@media (max-width: 600px) {
+  main.main {
+    padding: 0px 20px 100px;
+  }
+  #pickup #pickupGrid .workCard {
+    display: inline;
+  }
+  #pickup #pickupGrid {
+    display: inline;
+  }
+  #pickup #pickupGrid .workThumb {
+    width: 100%;
+  }
+  #pickup #pickupGrid .workBody {
+    padding-left: 0px;
+    padding-top: 20px;
+  }
+  #works #worksGrid.grid {
+    gap: 10px;
+  }
+  #works #worksGrid .workCat {
+    font-size: 10px;
+  }
+  #works #worksGrid .workTitle {
+    font-size: 12px;
+  }
 }
