@@ -48,37 +48,36 @@ if (document.readyState === "loading") {
 
 async function openDetail(id) {
   try {
+    // ★ 先に SITE_BASE を作る（ここが超重要）
+    const path = location.pathname;
+    const m = path.match(/^\/([^\/]+)\//);
+    const SITE_BASE = m ? `/${m[1]}` : "";
+
     const url = `${SITE_BASE}/content/works/${encodeURIComponent(id)}.md`;
     const res = await fetch(url, { cache: "no-store" });
     if (!res.ok) {
       console.warn(`[work-detail] md not found: ${url} (status: ${res.status})`);
       return;
     }
-    
+
     const raw = await res.text();
     const { data, body } = parseFrontmatter(raw);
 
-    // 画像パスをベースパスで補正
-    // 例: GitHub Pages の project site が /PORTFOLIO/ でも /portfolio/ でも吸収
-    const path = location.pathname;
-    const m = path.match(/^\/([^\/]+)\//);
-    const SITE_BASE = m ? `/${m[1]}` : "";
-
-    function withBase(path) {
-      if (!path) return "";
-      if (/^https?:\/\//.test(path)) return path;
-      if (path.startsWith("/")) return SITE_BASE + path;
-      return path;
+    function withBase(p) {
+      if (!p) return "";
+      if (/^https?:\/\//.test(p)) return p;
+      if (p.startsWith(SITE_BASE + "/")) return p;
+      if (p.startsWith("/")) return SITE_BASE + p;
+      return SITE_BASE + "/" + p; // 相対も一応補正
     }
 
     const heroUrl = withBase(data.thumbnail ?? "");
     const category = escapeHTML(data.category ?? "");
     const title = escapeHTML(data.title ?? id);
 
-    // Markdown本文をHTMLに変換
     const htmlBody = await markdownToHtml(body, SITE_BASE);
 
-    // DOM要素を取得（関数内で）
+    // 以下、あなたの既存のDOM反映処理はそのままでOK
     const detailOverlay = document.querySelector(".detailOverlay");
     const detailPanel = document.querySelector(".detailPanel");
     const detailHero = document.querySelector(".detailHero");
@@ -86,13 +85,11 @@ async function openDetail(id) {
     const detailTitle = document.querySelector(".detailTitle");
     const detailBody = document.querySelector(".detailBody");
 
-    // パネルを更新
     if (detailHero) detailHero.src = heroUrl;
     if (detailCategory) detailCategory.textContent = category;
     if (detailTitle) detailTitle.textContent = title;
     if (detailBody) detailBody.innerHTML = htmlBody;
 
-    // パネルを表示
     if (detailOverlay) {
       detailOverlay.classList.add("is-visible");
       detailOverlay.hidden = false;
@@ -101,12 +98,8 @@ async function openDetail(id) {
       detailPanel.classList.add("is-open");
     }
 
-    // スクロール禁止
     document.body.style.overflow = "hidden";
-    
-    // cursor-indicatorに再計算を指示
     window.dispatchEvent(new Event("detailPanelOpened"));
-
   } catch (err) {
     console.error(`[detail] failed to open detail: ${id}`, err);
   }
