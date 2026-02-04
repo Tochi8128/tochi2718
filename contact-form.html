@@ -17,16 +17,16 @@
       <header class="phone-form__header">
         <p class="phone-form__eyebrow">Contact</p>
         <h1 class="phone-form__title">ご依頼フォーム</h1>
-        <p class="phone-form__X">
-          XのDMにてご依頼されたい方はこちら→<a
-            href="https://x.com/tochi2718"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            X
-          </a>
-        </p>
+        <p class="phone-form__annotation">*が付いているものは必須項目です</p>
       </header>
+      <button
+        onclick="window.open('https://x.com/tochi2718')"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="phone-form__X"
+      >
+        <p>XのDMにてご依頼されたい方はこちら</p>
+      </button>
       <form
         class="form"
         id="contactForm"
@@ -37,17 +37,23 @@
       >
         <div class="edit" id="editPanel">
           <label class="field">
-            <span class="field__label">お名前</span>
+            <span class="field__label"
+              >お名前<span class="asterisk">*</span></span
+            >
             <input class="field__input" name="name" type="text" required />
           </label>
 
           <label class="field">
-            <span class="field__label">メール</span>
+            <span class="field__label"
+              >メール<span class="asterisk">*</span></span
+            >
             <input class="field__input" name="email" type="email" required />
           </label>
 
           <label class="field">
-            <span class="field__label">種別</span>
+            <span class="field__label"
+              >種別<span class="asterisk">*</span></span
+            >
             <select class="field__select" name="type" required>
               <option value="">選択してください</option>
               <option value="logo">ロゴ</option>
@@ -81,7 +87,9 @@
           </div>
 
           <label class="field">
-            <span class="field__label">概要</span>
+            <span class="field__label"
+              >概要<span class="asterisk">*</span></span
+            >
             <textarea
               class="field__textarea"
               name="message"
