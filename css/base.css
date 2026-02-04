@@ -432,9 +432,10 @@ body.is-contact #contact-phone {
   height: 100%;
 }
 
-.fallback iframe {
+.fallback__iframe{
   width: 100%;
-  height: 100%;
+  border: 0;
+  display: block;
 }
 
 /* ここが切替の本体（しきい値はお好みで） */
@@ -450,9 +451,21 @@ body.is-contact #contact-phone {
     display: none !important;
   }
 
-  /* 代替表示をON */
+  html, body{
+    height: auto !important;
+    overflow: auto !important;
+  }
+
   .fallback{
+    display: flex;          /* 既に display:block 指定があっても上書きOK */
+    flex-direction: column;
+  }
+
+  .fallback iframe{
+    width: 100%;
+    border: 0;
     display: block;
+    overflow: hidden;
   }
 }
 

@@ -25,5 +25,24 @@
 
     <script type="module" src="js/works-list.js"></script>
     <script type="module" src="js/cursor-sender.js"></script>
+    <script>
+      function postHeight() {
+        const h = Math.max(
+          document.body.scrollHeight,
+          document.documentElement.scrollHeight,
+        );
+        window.parent.postMessage(
+          { type: "IFRAME_HEIGHT", name: "inside", height: h },
+          "*",
+        );
+      }
+
+      // 初回
+      window.addEventListener("load", postHeight);
+
+      // レイアウト変化に追従
+      const ro = new ResizeObserver(() => postHeight());
+      ro.observe(document.documentElement);
+    </script>
   </body>
 </html>

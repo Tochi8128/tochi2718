@@ -15,8 +15,37 @@
   </head>
   <body>
     <section class="fallback">
-      <iframe src="./inside.html" title="portfolio inside"></iframe>
+      <!-- ここから追加 -->
+      <iframe
+        id="insideFrame"
+        class="fallback__iframe"
+        src="./inside.html"
+        scrolling="no"
+      ></iframe>
+
+      <iframe
+        id="formFrame"
+        class="fallback__iframe"
+        src="./contact-form.html?mode=page"
+        scrolling="no"
+      ></iframe>
     </section>
+
+    <script>
+      window.addEventListener("message", (e) => {
+        const d = e.data;
+        if (!d || d.type !== "IFRAME_HEIGHT") return;
+
+        const map = {
+          inside: document.getElementById("insideFrame"),
+          form: document.getElementById("formFrame"),
+        };
+        const iframe = map[d.name];
+        if (!iframe) return;
+
+        iframe.style.height = `${d.height}px`;
+      });
+    </script>
     <div class="pc-frame">
       <div class="laptop">
         <svg
@@ -803,5 +832,23 @@
     <script type="module" src="js/work-detail.js"></script>
     <script src="js/postit-position.js"></script>
     <script src="js/contact-transition.js"></script>
+    <script>
+      const frames = {
+        inside: document.getElementById("insideFrame"),
+        form: document.getElementById("formFrame"),
+      };
+
+      window.addEventListener("message", (e) => {
+        const data = e.data;
+        if (!data || typeof data !== "object") return;
+        if (data.type !== "IFRAME_HEIGHT") return;
+
+        const frame = frames[data.name];
+        if (!frame) return;
+
+        // 高さを反映（ちょい余白）
+        frame.style.height = `${Math.max(0, Number(data.height) || 0) + 8}px`;
+      });
+    </script>
   </body>
 </html>

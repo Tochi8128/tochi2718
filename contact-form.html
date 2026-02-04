@@ -127,5 +127,48 @@
       </form>
     </main>
     <script src="./js/contact-form.js"></script>
+
+    <!-- <script>
+      function postHeight() {
+        const h = Math.max(
+          document.body.scrollHeight,
+          document.documentElement.scrollHeight,
+        );
+        window.parent.postMessage(
+          { type: "IFRAME_HEIGHT", name: "form", height: h },
+          "*",
+        );
+      }
+
+      window.addEventListener("load", postHeight);
+
+      const ro = new ResizeObserver(() => postHeight());
+      ro.observe(document.documentElement);
+
+      // 入力中に高さ変わることがあるので保険（任意）
+      document.addEventListener("input", postHeight);
+    </script> -->
+    <script>
+      // mode=page のときは「ページ用」表示にする（中でスクロールしない）
+      const params = new URLSearchParams(location.search);
+      if (params.get("mode") === "page") {
+        document.documentElement.classList.add("mode-page");
+      }
+
+      function postHeight() {
+        const h = Math.max(
+          document.body.scrollHeight,
+          document.documentElement.scrollHeight,
+        );
+        window.parent.postMessage(
+          { type: "IFRAME_HEIGHT", name: "form", height: h },
+          "*",
+        );
+      }
+
+      window.addEventListener("load", postHeight);
+      const ro = new ResizeObserver(() => postHeight());
+      ro.observe(document.documentElement);
+    </script>
   </body>
 </html>

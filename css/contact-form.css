@@ -259,3 +259,14 @@ body.is-confirm #editPanel{ display: none; }
 body.is-done #donePanel { display: block; }
 body.is-done #editPanel { display: none; }
 body.is-done #confirmPanel { display: none; }
+
+/* 親ページに繋げて1枚スクロールにしたいモード */
+.mode-page,
+.mode-page body{
+  height: auto;
+}
+
+.mode-page .phone-form{
+  height: auto;
+  overflow: visible;
+}
