@@ -28,7 +28,7 @@ const WORK_IDS = [
   "001_vocaloid-kohakulabo2025-HP",
   "002_vocaloid-kohaku2026-HP",
   "003_dualpha",
-  "test"
+  "test",
 ];
 
 // ===== 設定 =====
