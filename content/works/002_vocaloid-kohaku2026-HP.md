@@ -5,7 +5,7 @@ year: 2025
 thumbnail: ./uploads/works/002_vocaloid-kohaku2025-HP/thumb.png
 featured: false
 ---
-webデザインを担当しました。\
+webデザインを担当しました。
 [ボカロ紅白歌合戦2025](https://vocakouhaku.com/2025/)
 
 Producer: Taaachan [(X)](https://x.com/T444CH4N_)
