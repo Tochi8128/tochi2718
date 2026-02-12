@@ -26,9 +26,14 @@ body {
   flex-direction: column;
   overflow: auto;
   &::-webkit-scrollbar {
-    display: none;
+    width: 12px; /* 横幅 */
   }
-  scrollbar-width: none;
+  &::-webkit-scrollbar-thumb {
+    background: var(--ink); /* ハンドルの色 */
+  }
+  &::-webkit-scrollbar-track {
+    background: #DAEFEF; /* 背景色 */
+  }
   -ms-overflow-style: none;
 }
 
@@ -269,4 +274,14 @@ body.is-done #confirmPanel { display: none; }
 .mode-page .phone-form{
   height: auto;
   overflow: visible;
+}
+
+/* スマホ版 */
+@media ( min-width: 300px) {
+  .phone-form {
+    padding: 14px 0px 16px;
+  }
+  .phone-form__eyebrow {
+    display: none;
+  }
 }
