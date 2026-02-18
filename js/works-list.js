@@ -2,7 +2,7 @@
 // inside.html で Works / Pickup を描画し、クリックで親へ OPEN_WORK を送る。
 // 一覧は content/works/index.json を読む（GitHub Actions で自動生成される前提）。
 
-const INDEX_URL = "/TochiNoDesign/content/works/index.json";
+const INDEX_URL = "/tochi2718/content/works/index.json";
 const FETCH_OPTIONS = { cache: "no-store" };
 
 const pickupGrid = document.getElementById("pickupGrid");

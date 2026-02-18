@@ -2,7 +2,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const SITE_BASE = "/TochiNoDesign"; // ★project pages の base
+const SITE_BASE = "/tochi2718"; // ★project pages の base
 const WORKS_DIR = path.resolve("content/works");
 const OUT_FILE = path.resolve("content/works/index.json");
 
