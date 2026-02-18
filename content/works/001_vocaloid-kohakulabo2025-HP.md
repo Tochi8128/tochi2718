@@ -1,5 +1,5 @@
 ---
-title: ボカロ紅白ラボ夏の陣2025　HP
+title: ボカロ紅白ラボ2025夏の陣　HP
 category: WebDesign
 year: 2025
 thumbnail: ./uploads/works/001_vocaloid-kohakulabo2025-HP/thumb.png
@@ -7,7 +7,7 @@ featured: false
 ---
 
 webデザインを担当しました。
-[https://vocakouhaku.com/labo-25/](https://vocakouhaku.com/labo-25/)
+[ボカロ紅白ラボ2025夏の陣](https://vocakouhaku.com/labo-25/)
 
 Producer: Taaachan\_[ (X)](https://x.com/T444CH4N_)
 Logo Designer: 穴田野うしろ[ (X)](https://x.com/lichi0_)
