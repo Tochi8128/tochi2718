@@ -31,13 +31,72 @@ header.top {
   width: 100%;
 }
 
-header.top h1.logo {
-  font-size: 30px;
-  font-weight: 500;
+/* 見えないテキスト（アクセシブル） */
+.sr-only{
+  position:absolute;
+  width:1px;height:1px;
+  padding:0;margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
+
+/* H1本体 */
+.h1{
+  position:relative;
+  font-size:38px;
+  line-height:1.05;
+  margin:0;
+  text-align:center;               /* いったん完全センター */
+  font-kerning: normal;
+  font-feature-settings: "kern" 1, "palt" 1, "pkna" 1;
+  font-weight: 450;
   color: #5144f1;
   margin: 100px 0px;
   display: flex;
   justify-content: center;
+  letter-spacing: 0.04em;
+}
+
+/* 見た目用 */
+.kern{
+  display:inline-flex;
+  align-items:baseline;
+  transform: translateX(var(--centerFix));
+}
+
+/* 1文字 */
+.ch{
+  display:inline-block;
+}
+
+/*
+  ここが「各ペアのカーニング」。
+  基本方針：
+  - 2文字目以降に margin-left を入れる
+  - 数値は em で管理（拡大縮小に追従）
+*/
+.k1{ margin-left: var(--k1, 0em); } /* 置（倒-置） */
+.k2{ margin-left: var(--k2, 0em); } /* の（置-の） */
+.k3{ margin-left: var(--k3, 0em); } /* デ（の-デ） */
+.k4{ margin-left: var(--k4, 0em); } /* ザ（デ-ザ） */
+.k5{ margin-left: var(--k5, 0em); } /* イ（ザ-イ） */
+.k6{ margin-left: var(--k6, 0em); } /* ン（イ-ン） */
+
+.h1{
+  font-weight:450;
+
+  --trk: 0.035em;
+
+  --k1: 0.13em;
+  --k2: 0.14em;
+  --k3: 0.16em;
+  --k4: 0.16em;
+  --k5: 0.16em;
+  --k6: 0.19em;
+
+  --centerFix: -0.008em;
 }
 
 /* ========================================

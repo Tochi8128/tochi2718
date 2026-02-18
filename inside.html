@@ -7,9 +7,21 @@
     <title>Inside</title>
   </head>
   <body>
-    <header class="top">
-      <h1 class="logo">倒置のデザイン</h1>
-    </header>
+    <h1 class="h1" aria-label="倒置のデザイン">
+      <!-- スクリーンリーダー/SEO用（意味はh1に残す） -->
+      <span class="sr-only">倒置のデザイン</span>
+
+      <!-- 見た目調整用（1文字ずつ） -->
+      <span class="kern" aria-hidden="true">
+        <span class="ch">倒</span>
+        <span class="ch k1">置</span>
+        <span class="ch k2">の</span>
+        <span class="ch k3">デ</span>
+        <span class="ch k4">ザ</span>
+        <span class="ch k5">イ</span>
+        <span class="ch k6">ン</span>
+      </span>
+    </h1>
 
     <main class="main">
       <section id="pickup">
