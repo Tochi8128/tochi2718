@@ -7,7 +7,7 @@ featured: false
 ---
 
 webデザインを担当しました。
-[https://vocakouhaku.com/2025/](https://vocakouhaku.com/2025/)
+[ボカロ紅白歌合戦2025](https://vocakouhaku.com/2025/)
 
 Producer: Taaachan\_[ (X)](https://x.com/T444CH4N_)
 Main Visual Artist: MAiCO[ (X)](https://x.com/YMDsaikyou_2021)
