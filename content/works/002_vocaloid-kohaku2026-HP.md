@@ -1,16 +1,28 @@
 ---
 title: ボカロ紅白歌合戦2025　HP
 category: WebDesign
-thumbnail: ./uploads/works/002_vocaloid-kohaku2025-HP/thumb.png
 year: 2025
+thumbnail: ./uploads/works/002_vocaloid-kohaku2025-HP/thumb.png
+featured: false
 ---
-
 webデザインを担当しました。
-[https://vocakouhaku.com/2025/](https://vocakouhaku.com/2025/)
+<https://vocakouhaku.com/2025/>
 
-Producer: Taaachan\_[ (X)](https://x.com/T444CH4N_)
+Producer: Taaachan_[ (X)](https://x.com/T444CH4N_)
 Main Visual Artist: MAiCO[ (X)](https://x.com/YMDsaikyou_2021)
 Logo Designer: おて[ (X)](https://x.com/RingO_1460)
 LP Coder: あかい[ (X)](https://x.com/4Kai4k)
 MC Visual Artist: 曙[ (X)](https://x.com/akbn_364)
 Copywriter: Hate-Life_KEIV[ (X)](https://x.com/HateLife_KEIV)
+
+[](https://x.com/HateLife_KEIV)ボカロ紅白歌合戦2025のテーマ「ポップリズム」をもとに、webデザインを制作しました。
+
+本テーマは、「ポップ」「リズム」「プリズム」という3つの要素が重なった言葉です。そのため、単にポップな装飾を増やすのではなく、要素の動きや反復、色の広がり方などを通して、それぞれが調和しながら全てを感じられるような構成を目指しました。
+
+ビジュアル表現としては、びっくり箱のように要素が飛び出す瞬間や、観覧車やメリーゴーランドのように回転し続ける動きをイメージしています。サーカスやおもちゃ箱のような、見ているだけで楽しくなる視覚的な体験をベースに、コミカルで高揚感のあるポップさを意識しました。
+
+形状設計では、角丸長方形を主要モチーフとして使用しています。ただし一般的なUIパーツのような角丸ではなく、輪郭を細かく調整し、グミのような柔らかさや弾力を感じる形状を目指しました。視覚的な「柔らかさ」を持たせることで、楽しさや親しみやすさを強めています。
+
+配色はメインビジュアルイラストを基準に設計し、鮮やかな赤をベースカラーとして設定しました。そこに黄色や緑をアクセントとして配置し、エネルギー感と楽しさが直感的に伝わるカラーバランスにしています。
+
+このビジュアルを通して、「ボカロ紅白歌合戦2025が楽しみだ」と感じてもらうことを最初の体験目標としています。イベントの高揚感や期待感を、視覚的な楽しさとして先に体験できるような設計を目指しました。[](https://x.com/HateLife_KEIV)
