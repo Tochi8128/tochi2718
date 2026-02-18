@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: tochi8128/TochiNoDesign
+  repo: tochi8128/tochi2718
   branch: main
 
   # ↓ GitHub Pagesでは必須：外部OAuth（後でCloudflare Workerを置く）
@@ -8,9 +8,9 @@ backend:
   auth_endpoint: /auth
 
 media_folder: "uploads/works"
-public_folder: "/TochiNoDesign/uploads/works"
+public_folder: "/tochi2718/uploads/works"
 
-site_url: "https://tochi8128.github.io/TochiNoDesign"
+site_url: "https://tochi8128.github.io/tochi2718"
 
 # 作品mdの置き場所：あなたの実フォルダに合わせて変更
 # 例：content/works に置く運用が一番きれい
