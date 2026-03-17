@@ -1,0 +1,39 @@
+backend:
+  name: github
+  repo: tochi8128/tochi2718
+  branch: main
+  base_url: https://tochi-portfolio.toch2718.workers.dev
+  auth_endpoint: /auth
+
+media_folder: "uploads/works"
+public_folder: "/tochi2718/uploads/works"
+
+site_url: "https://tochi8128.github.io/tochi2718"
+
+collections:
+  - name: "site"
+    label: "Site Data"
+    files:
+      - label: "Works"
+        name: "works"
+        file: "data/works.json"
+        format: "json"
+        fields:
+          - label: "Works List"
+            name: "works"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - {
+                  label: "Category",
+                  name: "category",
+                  widget: "string",
+                  required: false,
+                }
+              - { label: "Thumbnail", name: "thumbnail", widget: "image" }
+              - {
+                  label: "Description",
+                  name: "description",
+                  widget: "text",
+                  required: false,
+                }
