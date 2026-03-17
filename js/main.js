@@ -7,12 +7,19 @@ async function loadWorks() {
     const data = await res.json();
 
     nav.innerHTML = data.works.map(work => `
-      <div class="nav-item">
-        <img src="${work.thumbnail}" alt="${work.title}">
+      <div class="work-item">
+        <div class="thumb">
+          <img src="${work.thumbnail}" alt="${work.title}">
+        </div>
+        <div class="meta">
+          <p class="category">${work.category || ""}</p>
+          <h2 class="title">${work.title}</h2>
+        </div>
       </div>
     `).join("");
+
   } catch (e) {
-    console.error("worksの読み込み失敗", e);
+    console.error(e);
   }
 }
 
