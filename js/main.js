@@ -1,3 +1,10 @@
+if (window.marked) {
+  marked.setOptions({
+    breaks: true,
+    gfm: true,
+  });
+}
+
 function slugify(text = "") {
   return text
     .toString()
@@ -9,11 +16,25 @@ function slugify(text = "") {
 
 function getWorkSlug(work) {
   if (work.slug && work.slug.trim()) return work.slug.trim();
-  return slugify(work.title);
+  return slugify(work.title || "");
 }
 
-function getWorkUrl(work) {
-  return `./works/${encodeURIComponent(getWorkSlug(work))}/`;
+function getWorkPath(work) {
+  return `/tochi2718/works/${encodeURIComponent(getWorkSlug(work))}/`;
+}
+
+function normalizePath(pathname) {
+  return pathname.replace(/\/+$/, "") || "/";
+}
+
+function getSlugFromCurrentPath() {
+  const path = normalizePath(window.location.pathname);
+  const match = path.match(/^\/tochi2718\/works\/([^/]+)$/);
+  return match ? decodeURIComponent(match[1]) : null;
+}
+
+function isWorksRootPath() {
+  return normalizePath(window.location.pathname) === "/tochi2718/works";
 }
 
 function renderPrimary(item) {
@@ -28,101 +49,148 @@ function renderPrimary(item) {
     : "";
 
   cat.innerHTML = `
-    ${item.category ? `<div class="category"><div class="circle"></div><p>${item.category}</p></div>` : ""}
+    ${
+      item.category
+        ? `<div class="category"><div class="circle"></div><p>${item.category}</p></div>`
+        : ""
+    }
     ${item.title ? `<h1 class="title primary-title">${item.title}</h1>` : ""}
   `;
 
-  text.innerHTML = item.description
-  ? `<div class="primary-description">${marked.parse(item.description, {
-      breaks: true,
-      gfm: true
-    })}</div>`
-  : "";
+  const description = item.description || "";
+  const parsed = window.marked ? marked.parse(description) : description;
+
+  text.innerHTML = parsed
+    ? `<div class="primary-description">${parsed}</div>`
+    : "";
 }
 
-function goTop() {
-  history.pushState({}, "", "./");
-  renderPrimary(defaultContent);
+function setActiveWork(index) {
+  document.querySelectorAll(".work-item").forEach((item) => {
+    item.classList.toggle("is-active", Number(item.dataset.index) === index);
+  });
 }
-
-function redirectIfWorksRoot() {
-  const normalizedPath = window.location.pathname.replace(/\/+$/, "");
-  if (normalizedPath.endsWith("/works")) {
-    window.location.replace("../");
-  }
-}
-
-const defaultContent = {
-  thumbnail: "./images/top-logo.gif",
-  category: "About",
-  title: "倒置",
-  description: `
-テキストテキストテキストテキストテキスト
-`
-};
 
 async function loadWorks() {
-  redirectIfWorksRoot();
+  if (isWorksRootPath()) {
+    window.location.replace("/tochi2718/");
+    return;
+  }
 
   const nav = document.getElementById("works-nav");
   if (!nav) return;
+
+  const defaultContent = {
+    thumbnail: "./images/top-logo.gif",
+    category: "About",
+    title: "倒置",
+    description: `
+ここにabout文を入れます。
+`,
+  };
 
   try {
     const res = await fetch("./data/works.json");
     const data = await res.json();
     const works = Array.isArray(data.works) ? data.works : [];
 
-    renderPrimary(defaultContent);
-
     nav.innerHTML = works
       .map(
         (work, index) => `
-        <a class="work-item" href="${getWorkUrl(work)}" data-index="${index}">
-          <div class="thumb">
-            <img src="${work.thumbnail}" alt="${work.title}">
-          </div>
-          <div class="meta">
-            <p class="category">${work.category || ""}</p>
-            <h2 class="title">${work.title}</h2>
-          </div>
-        </a>
-      `,
+          <a class="work-item" href="${getWorkPath(work)}" data-index="${index}">
+            <div class="thumb">
+              <img src="${work.thumbnail}" alt="${work.title}">
+            </div>
+            <div class="meta">
+              <p class="category">${work.category || ""}</p>
+              <h2 class="title">${work.title || ""}</h2>
+            </div>
+          </a>
+        `
       )
       .join("");
 
-    const items = nav.querySelectorAll(".work-item");
+    function showDefault(push = true) {
+      renderPrimary(defaultContent);
+      setActiveWork(-1);
+      if (push) {
+        history.pushState({ type: "top" }, "", "/tochi2718/");
+      }
+    }
 
-    items.forEach((item) => {
+    function showWorkByIndex(index, push = true) {
+      const work = works[index];
+      if (!work) {
+        showDefault(push);
+        return;
+      }
+
+      renderPrimary(work);
+      setActiveWork(index);
+
+      if (push) {
+        history.pushState(
+          { type: "work", workIndex: index },
+          "",
+          getWorkPath(work)
+        );
+      }
+    }
+
+    const initialSlug = getSlugFromCurrentPath();
+    if (initialSlug) {
+      const initialIndex = works.findIndex(
+        (work) => getWorkSlug(work) === initialSlug
+      );
+      if (initialIndex >= 0) {
+        showWorkByIndex(initialIndex, false);
+      } else {
+        showDefault(false);
+      }
+    } else {
+      showDefault(false);
+    }
+
+    nav.querySelectorAll(".work-item").forEach((item) => {
       item.addEventListener("click", (event) => {
         event.preventDefault();
         const index = Number(item.dataset.index);
-        const work = works[index];
-        renderPrimary(work);
-        history.pushState({ workIndex: index }, "", getWorkUrl(work));
+        showWorkByIndex(index, true);
       });
     });
 
-    window.addEventListener("popstate", (event) => {
-      if (event.state && typeof event.state.workIndex === "number") {
-        renderPrimary(works[event.state.workIndex]);
+    window.addEventListener("popstate", () => {
+      const slug = getSlugFromCurrentPath();
+      if (!slug) {
+        showDefault(false);
+        return;
+      }
+
+      const index = works.findIndex((work) => getWorkSlug(work) === slug);
+      if (index >= 0) {
+        showWorkByIndex(index, false);
       } else {
-        renderPrimary(defaultContent);
+        showDefault(false);
       }
     });
 
-    const topButton = document.querySelector(".top-trigger");
+    const topTrigger = document.querySelector(".top-trigger");
     const logo = document.querySelector(".logo");
 
-    if (topButton) {
-      topButton.addEventListener("click", goTop);
+    if (topTrigger) {
+      topTrigger.addEventListener("click", () => {
+        showDefault(true);
+      });
     }
 
     if (logo) {
       logo.style.cursor = "pointer";
-      logo.addEventListener("click", goTop);
+      logo.addEventListener("click", () => {
+        showDefault(true);
+      });
     }
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error("worksの読み込みに失敗しました:", error);
   }
 }
 
