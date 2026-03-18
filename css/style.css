@@ -27,11 +27,12 @@ a,
 span {
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 400;
+  color: var(--blue);
 }
 
 header {
   padding: 15px 35px;
-  border-bottom: 2px solid var(--blue);
+  border-bottom: var(--border);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -85,12 +86,28 @@ main .primary .p-cat {
   margin-top: 20px;
 }
 
+main .primary .p-cat .category {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+main .primary .p-cat .category p {
+  font-size: 12px;
+}
+
+main .primary .p-cat .category .circle {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
 main .primary .p-cat .primary-title {
   font-size: 12px;
   margin-top: 4px;
 }
 
-main .primary .p-cat .primary-description {
+main .primary .text .primary-description {
   color: var(--blue);
   margin-top: 12px;
   line-height: 1.7;

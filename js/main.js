@@ -10,7 +10,7 @@ function renderPrimary(item) {
     : "";
 
   cat.innerHTML = `
-    ${item.category ? `<p class="category">${item.category}</p>` : ""}
+    ${item.category ? `<div class="category"><div class="circle"></div><p>${item.category}<p></div>` : ""}
     ${item.title ? `<h1 class="title primary-title">${item.title}</h1>` : ""}
   `;
 
@@ -28,7 +28,7 @@ async function loadWorks() {
     category: "About",
     title: "倒置",
     description:
-      "サブカルのためのデザイン・サブカルを支える人のためのデザイン。ここにabout文を入れる。"
+      "ここにabout文を入れる。"
   };
 
   try {
