@@ -70,6 +70,15 @@ function renderPrimary(item) {
   text.innerHTML = parsed
     ? `<div class="primary-description">${parsed}</div>`
     : "";
+
+  const container = text.querySelector(".primary-description");
+
+  if (container) {
+    container.querySelectorAll("a").forEach((a) => {
+      a.setAttribute("target", "_blank");
+      a.setAttribute("rel", "noopener noreferrer");
+    });
+  }
 }
 
 function setActiveWork(index) {
@@ -113,7 +122,7 @@ async function loadWorks() {
               <h2 class="title">${work.title || ""}</h2>
             </div>
           </a>
-        `
+        `,
       )
       .join("");
 
@@ -139,7 +148,7 @@ async function loadWorks() {
         history.pushState(
           { type: "work", workIndex: index },
           "",
-          getWorkPath(work)
+          getWorkPath(work),
         );
       }
     }
@@ -147,7 +156,7 @@ async function loadWorks() {
     const initialSlug = getSlugFromCurrentLocation();
     if (initialSlug) {
       const initialIndex = works.findIndex(
-        (work) => getWorkSlug(work) === initialSlug
+        (work) => getWorkSlug(work) === initialSlug,
       );
       if (initialIndex >= 0) {
         showWorkByIndex(initialIndex, false);
