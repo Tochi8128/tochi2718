@@ -37,11 +37,23 @@ header {
   align-items: center;
 }
 
+@media screen and (max-width: 700px) {
+  main {
+    padding: 10px 15px;
+  }
+}
+
 header .header-left,
 header .header-right {
   display: flex;
   gap: 20px;
   align-items: center;
+}
+
+@media screen and (max-width: 700px) {
+  header .header-right {
+    gap: 15px;
+  }
 }
 
 header .header-left .logo {
