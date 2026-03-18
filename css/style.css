@@ -71,6 +71,12 @@ main {
   }
 }
 
+@media screen and (max-width: 700px) {
+  main {
+    margin: 10px 15px;
+  }
+}
+
 main .primary {
   width: auto;
   padding-bottom: 200px;
@@ -172,6 +178,24 @@ main .secondary .nav {
     column-gap: 15px;
     row-gap: 10px;
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .works {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .works {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .works {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 
