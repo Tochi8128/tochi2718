@@ -89,7 +89,7 @@ main .primary .p-cat {
 main .primary .p-cat .category {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 12px;
 }
 
 main .primary .p-cat .category p {
@@ -97,20 +97,22 @@ main .primary .p-cat .category p {
 }
 
 main .primary .p-cat .category .circle {
-  height: 50px;
-  width: 50px;
+  height: 32px;
+  width: 32px;
   border-radius: 50%;
+  background-color: var(--blue);
 }
 
 main .primary .p-cat .primary-title {
-  font-size: 12px;
-  margin-top: 4px;
+  font-size: 24px;
+  margin-top: 12px;
 }
 
 main .primary .text .primary-description {
   color: var(--blue);
   margin-top: 12px;
   line-height: 1.7;
+  font-size: 12px;
 }
 
 main .secondary {
