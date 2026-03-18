@@ -33,8 +33,11 @@ function renderPrimary(item) {
   `;
 
   text.innerHTML = item.description
-    ? `<div class="primary-description">${marked.parse(item.description)}</div>`
-    : "";
+  ? `<div class="primary-description">${marked.parse(item.description, {
+      breaks: true,
+      gfm: true
+    })}</div>`
+  : "";
 }
 
 function goTop() {
@@ -55,10 +58,6 @@ const defaultContent = {
   title: "倒置",
   description: `
 テキストテキストテキストテキストテキスト
-
-[BOOTH](https://tochi2718.booth.pm/)
-
-![sample](./images/top-logo.gif)
 `
 };
 
