@@ -25,6 +25,12 @@ collections:
             fields:
               - { label: "Title", name: "title", widget: "string" }
               - {
+                  label: "Slug",
+                  name: "slug",
+                  widget: "string",
+                  required: false,
+                }
+              - {
                   label: "Category",
                   name: "category",
                   widget: "string",
@@ -34,6 +40,6 @@ collections:
               - {
                   label: "Description",
                   name: "description",
-                  widget: "text",
+                  widget: "markdown",
                   required: false,
                 }

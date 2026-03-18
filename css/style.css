@@ -67,6 +67,7 @@ main {
 
 main .primary {
   width: calc(100vw - (2 * 35px) - 20px - 450px);
+  padding-bottom: 200px;
 }
 
 main .primary .p-thumb {
@@ -114,6 +115,26 @@ main .primary .text .primary-description {
   font-size: 12px;
 }
 
+main .primary .text .primary-description p,
+main .primary .text .primary-description ul,
+main .primary .text .primary-description ol {
+  color: var(--blue);
+  margin-top: 12px;
+  line-height: 1.7;
+  font-size: 12px;
+}
+
+main .primary .text .primary-description a {
+  color: var(--blue);
+}
+
+main .primary .text .primary-description img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-top: 12px;
+}
+
 main .secondary {
   width: 450px;
   display: flex;
@@ -135,6 +156,13 @@ main .secondary .nav {
   padding: 0;
   width: 100%;
   text-align: left;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo,
+.top-trigger {
   cursor: pointer;
 }
 

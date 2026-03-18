@@ -1,3 +1,21 @@
+function slugify(text = "") {
+  return text
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w\-ぁ-んァ-ヶ一-龠ー]/g, "");
+}
+
+function getWorkSlug(work) {
+  if (work.slug && work.slug.trim()) return work.slug.trim();
+  return slugify(work.title);
+}
+
+function getWorkUrl(work) {
+  return `./works/${encodeURIComponent(getWorkSlug(work))}/`;
+}
+
 function renderPrimary(item) {
   const thumb = document.querySelector(".p-thumb");
   const cat = document.querySelector(".p-cat");
@@ -10,62 +28,100 @@ function renderPrimary(item) {
     : "";
 
   cat.innerHTML = `
-    ${item.category ? `<div class="category"><div class="circle"></div><p>${item.category}<p></div>` : ""}
+    ${item.category ? `<div class="category"><div class="circle"></div><p>${item.category}</p></div>` : ""}
     ${item.title ? `<h1 class="title primary-title">${item.title}</h1>` : ""}
   `;
 
   text.innerHTML = item.description
-    ? `<p class="primary-description">${item.description}</p>`
+    ? `<div class="primary-description">${marked.parse(item.description)}</div>`
     : "";
 }
 
+function goTop() {
+  history.pushState({}, "", "./");
+  renderPrimary(defaultContent);
+}
+
+function redirectIfWorksRoot() {
+  const normalizedPath = window.location.pathname.replace(/\/+$/, "");
+  if (normalizedPath.endsWith("/works")) {
+    window.location.replace("../");
+  }
+}
+
+const defaultContent = {
+  thumbnail: "./images/top-logo.gif",
+  category: "About",
+  title: "倒置",
+  description: `
+テキストテキストテキストテキストテキスト
+
+[BOOTH](https://tochi2718.booth.pm/)
+
+![sample](./images/top-logo.gif)
+`
+};
+
 async function loadWorks() {
+  redirectIfWorksRoot();
+
   const nav = document.getElementById("works-nav");
   if (!nav) return;
-
-  const defaultContent = {
-    thumbnail: "./images/top-logo.gif",
-    category: "About",
-    title: "倒置",
-    description:
-      "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト"
-  };
 
   try {
     const res = await fetch("./data/works.json");
     const data = await res.json();
+    const works = Array.isArray(data.works) ? data.works : [];
 
     renderPrimary(defaultContent);
 
-    nav.innerHTML = data.works.map((work, index) => `
-      <button class="work-item" type="button" data-index="${index}">
-        <div class="thumb">
-          <img src="${work.thumbnail}" alt="${work.title}">
-        </div>
-        <div class="meta">
-          <p class="category">${work.category || ""}</p>
-          <h2 class="title">${work.title}</h2>
-        </div>
-      </button>
-    `).join("");
+    nav.innerHTML = works
+      .map(
+        (work, index) => `
+        <a class="work-item" href="${getWorkUrl(work)}" data-index="${index}">
+          <div class="thumb">
+            <img src="${work.thumbnail}" alt="${work.title}">
+          </div>
+          <div class="meta">
+            <p class="category">${work.category || ""}</p>
+            <h2 class="title">${work.title}</h2>
+          </div>
+        </a>
+      `,
+      )
+      .join("");
 
     const items = nav.querySelectorAll(".work-item");
 
-    items.forEach(item => {
-      item.addEventListener("click", () => {
+    items.forEach((item) => {
+      item.addEventListener("click", (event) => {
+        event.preventDefault();
         const index = Number(item.dataset.index);
-        const work = data.works[index];
+        const work = works[index];
         renderPrimary(work);
+        history.pushState({ workIndex: index }, "", getWorkUrl(work));
       });
     });
 
-    const topButton = document.querySelector(".header-right p:first-child");
-    if (topButton) {
-      topButton.addEventListener("click", () => {
+    window.addEventListener("popstate", (event) => {
+      if (event.state && typeof event.state.workIndex === "number") {
+        renderPrimary(works[event.state.workIndex]);
+      } else {
         renderPrimary(defaultContent);
-      });
+      }
+    });
+
+    const topButton = document.querySelector(".top-trigger");
+    const logo = document.querySelector(".logo");
+
+    if (topButton) {
+      topButton.addEventListener("click", goTop);
     }
 
+    if (logo) {
+      logo.style.cursor = "pointer";
+      logo.addEventListener("click", goTop);
+    }
   } catch (e) {
     console.error(e);
   }
