@@ -54,6 +54,9 @@ header p,
 header a {
   color: var(--blue);
   font-size: 10pt;
+  text-decoration: none;
+  background: none;
+  border: none;
 }
 
 main {
@@ -78,12 +81,16 @@ main .primary .p-thumb img {
   object-fit: cover;
 }
 
-.primary-title {
-  font-size: 28px;
+main .primary .p-cat {
+  margin-top: 20px;
+}
+
+main .primary .p-cat .primary-title {
+  font-size: 12px;
   margin-top: 4px;
 }
 
-.primary-description {
+main .primary .p-cat .primary-description {
   color: var(--blue);
   margin-top: 12px;
   line-height: 1.7;
