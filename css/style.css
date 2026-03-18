@@ -181,6 +181,7 @@ main .secondary .nav {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: calc(450px - 192px - 20px);
 }
 
 .thumb::after {
