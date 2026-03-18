@@ -65,9 +65,21 @@ main {
   gap: 20px;
 }
 
+@media screen and (max-width: 1200px) {
+  main {
+    display: block;
+  }
+}
+
 main .primary {
-  width: calc(100vw - (2 * 35px) - 20px - 450px);
+  width: auto;
   padding-bottom: 200px;
+}
+
+@media screen and (max-width: 1200px) {
+  main .primary {
+    padding-bottom: 100px;
+  }
 }
 
 main .primary .p-thumb {
@@ -142,9 +154,25 @@ main .secondary {
   gap: 15px;
 }
 
+@media screen and (max-width: 1200px) {
+  main .secondary {
+    width: auto;
+    padding-bottom: 200px;
+  }
+}
+
 main .secondary .nav {
   height: 160px;
   border: var(--border);
+}
+
+@media screen and (max-width: 1200px) {
+  .works {
+    display: grid;
+    column-gap: 15px;
+    row-gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .work-item {
@@ -161,6 +189,13 @@ main .secondary .nav {
   color: inherit;
 }
 
+@media screen and (max-width: 1200px) {
+  .work-item {
+    display: block;
+    width: 100%;
+  }
+}
+
 .logo,
 .top-trigger {
   cursor: pointer;
@@ -170,6 +205,12 @@ main .secondary .nav {
   width: 192px;
   position: relative;
   aspect-ratio: 8 / 5;
+}
+
+@media screen and (max-width: 1200px) {
+  .thumb {
+    width: 100%;
+  }
 }
 
 .thumb img {
@@ -182,6 +223,12 @@ main .secondary .nav {
   flex-direction: column;
   justify-content: center;
   width: calc(450px - 192px - 20px);
+}
+
+@media screen and (max-width: 1200px) {
+  .meta {
+    width: auto;
+  }
 }
 
 .thumb::after {
@@ -204,4 +251,10 @@ main .secondary .nav {
 
 .title {
   font-size: 17px;
+}
+
+@media screen and (max-width: 1200px) {
+  .title {
+    font-size: 14px;
+  }
 }
