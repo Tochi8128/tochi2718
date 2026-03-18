@@ -27,14 +27,21 @@ function normalizePath(pathname) {
   return pathname.replace(/\/+$/, "") || "/";
 }
 
-function getSlugFromCurrentPath() {
-  const path = normalizePath(window.location.pathname);
+function getRequestedPath() {
+  const params = new URLSearchParams(window.location.search);
+  const redirectedPath = params.get("path");
+  if (redirectedPath) return normalizePath(decodeURIComponent(redirectedPath));
+  return normalizePath(window.location.pathname);
+}
+
+function getSlugFromCurrentLocation() {
+  const path = getRequestedPath();
   const match = path.match(/^\/tochi2718\/works\/([^/]+)$/);
   return match ? decodeURIComponent(match[1]) : null;
 }
 
 function isWorksRootPath() {
-  return normalizePath(window.location.pathname) === "/tochi2718/works";
+  return getRequestedPath() === "/tochi2718/works";
 }
 
 function renderPrimary(item) {
@@ -137,7 +144,7 @@ async function loadWorks() {
       }
     }
 
-    const initialSlug = getSlugFromCurrentPath();
+    const initialSlug = getSlugFromCurrentLocation();
     if (initialSlug) {
       const initialIndex = works.findIndex(
         (work) => getWorkSlug(work) === initialSlug
@@ -160,7 +167,7 @@ async function loadWorks() {
     });
 
     window.addEventListener("popstate", () => {
-      const slug = getSlugFromCurrentPath();
+      const slug = getSlugFromCurrentLocation();
       if (!slug) {
         showDefault(false);
         return;
