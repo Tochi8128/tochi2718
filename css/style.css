@@ -38,7 +38,7 @@ header {
 }
 
 @media screen and (max-width: 700px) {
-  main {
+  header {
     padding: 10px 15px;
   }
 }
