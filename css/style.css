@@ -47,12 +47,17 @@ span {
   filter: url("#goo");
 }
 
-@media (max-width: 1024px) {
+@media (hover: none), (pointer: coarse), (max-width: 1024px) {
   .cursor {
-    display: none;
+    display: none !important;
   }
 
   * {
+    cursor: auto !important;
+  }
+
+  html,
+  body {
     cursor: auto !important;
   }
 }
