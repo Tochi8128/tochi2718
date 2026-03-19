@@ -205,7 +205,6 @@ main .secondary {
 }
 
 main .secondary .nav {
-  height: 160px;
   border: var(--border);
   padding: 16px;
   display: flex;
@@ -217,11 +216,16 @@ main .secondary .nav {
 .category-filter {
   height: fit-content;
   padding: 6px 12px;
-  border: var(--border);
+  border: 1.7px solid var(--border);
   background: transparent;
   color: var(--blue);
   cursor: pointer;
   font-size: 12px;
+  border-radius: 3px;
+}
+
+.category-filter:hover {
+  border: var(--border);
 }
 
 .category-filter.is-active {
