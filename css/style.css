@@ -45,6 +45,8 @@ span {
   pointer-events: none;
   z-index: 9999;
   filter: url("#goo");
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 @media (hover: none), (pointer: coarse), (max-width: 1024px) {
