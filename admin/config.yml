@@ -6,7 +6,7 @@ backend:
   auth_endpoint: /auth
 
 media_folder: "uploads/works"
-public_folder: "/tochi2718/uploads/works"
+public_folder: "/uploads/works"
 
 site_url: "https://tochi8128.github.io/tochi2718"
 

@@ -20,7 +20,7 @@ function getWorkSlug(work) {
 }
 
 function getWorkPath(work) {
-  return `/tochi2718/works/${encodeURIComponent(getWorkSlug(work))}/`;
+  return `/works/${encodeURIComponent(getWorkSlug(work))}/`;
 }
 
 function normalizePath(pathname) {
@@ -41,7 +41,7 @@ function getSlugFromCurrentLocation() {
 }
 
 function isWorksRootPath() {
-  return getRequestedPath() === "/tochi2718/works";
+  return getRequestedPath() === "/works";
 }
 
 function parseCategories(categoryText = "") {
@@ -96,7 +96,7 @@ function setActiveWork(index) {
 
 async function loadWorks() {
   if (isWorksRootPath()) {
-    window.location.replace("/tochi2718/");
+    window.location.replace("/");
     return;
   }
 
@@ -105,7 +105,7 @@ async function loadWorks() {
   if (!worksContainer || !categoryNav) return;
 
   const defaultContent = {
-    thumbnail: "/tochi2718/images/top-logo.gif",
+    thumbnail: "/images/top-logo.gif",
     category: "About",
     title: "倒置",
     description: `
@@ -205,7 +205,7 @@ async function loadWorks() {
       setActiveWork(-1);
 
       if (push) {
-        history.pushState({ type: "top" }, "", "/tochi2718/");
+        history.pushState({ type: "top" }, "", "/");
       }
     }
 
