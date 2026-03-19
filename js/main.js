@@ -105,7 +105,7 @@ async function loadWorks() {
   if (!worksContainer || !categoryNav) return;
 
   const defaultContent = {
-    thumbnail: "./images/top-logo.gif",
+    thumbnail: "/tochi2718/images/top-logo.gif",
     category: "About",
     title: "倒置",
     description: `

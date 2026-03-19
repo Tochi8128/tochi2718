@@ -76,6 +76,11 @@ span {
   transform: translate(-50%, -50%);
 }
 
+.safari .cursor-dot {
+  width: 12px;
+  height: 12px;
+}
+
 .header {
   padding: 15px 35px;
   border-bottom: var(--border);
