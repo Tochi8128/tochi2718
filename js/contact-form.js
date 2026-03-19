@@ -251,4 +251,16 @@ hoverTargets.forEach((el) => {
   });
 });
 
+const inputs = document.querySelectorAll("input, textarea, select");
+
+inputs.forEach((el) => {
+  el.addEventListener("focus", () => {
+    cursor.style.display = "none";
+  });
+
+  el.addEventListener("blur", () => {
+    cursor.style.display = "block";
+  });
+});
+
 animate();
