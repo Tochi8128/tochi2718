@@ -8,7 +8,7 @@ backend:
 media_folder: "uploads/works"
 public_folder: "/uploads/works"
 
-site_url: "https://tochi8128.github.io/tochi2718"
+site_url: "https://tochi2718.com"
 
 collections:
   - name: "site"
