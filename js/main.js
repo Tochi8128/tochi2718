@@ -44,6 +44,13 @@ function isWorksRootPath() {
   return getRequestedPath() === "/tochi2718/works";
 }
 
+function parseCategories(categoryText = "") {
+  return categoryText
+    .split(" / ")
+    .map((cat) => cat.trim())
+    .filter(Boolean);
+}
+
 function renderPrimary(item) {
   const thumb = document.querySelector(".p-thumb");
   const cat = document.querySelector(".p-cat");
@@ -93,8 +100,9 @@ async function loadWorks() {
     return;
   }
 
-  const nav = document.getElementById("works-nav");
-  if (!nav) return;
+  const worksContainer = document.getElementById("works-nav");
+  const categoryNav = document.querySelector(".secondary .nav");
+  if (!worksContainer || !categoryNav) return;
 
   const defaultContent = {
     thumbnail: "./images/top-logo.gif",
@@ -107,7 +115,7 @@ async function loadWorks() {
 普段は、ロゴやWebデザインを中心に制作しながら、「意味に縛られない文字のあり方」や「複数の視点が同時に成立する構造」をテーマに、タイポグラフィやインタラクティブな表現を探っています。
 ひとつの正解に収束させるのではなく、見る角度や文脈によって解釈が揺れるような状態を設計すること。その中で、誰もが納得できる一貫した論理から作られる、誰もが驚くような独創的なアイデア「筋の通っためちゃくちゃ」をかたちにすることを大切にしています。
 また、制作においては、お客様・エンドユーザー・自分・そしてもうひとつ外側の視点、という複数のレイヤーを行き来しながら考えることで、納得感と意外性の両立を目指しています。
-サブカルチャー領域を中心に、クリエイターに向けたロゴデザインや素材、ビジュアル制作、Webデザイン制作などを行っています。
+サブカルチャー領域を中心に、クリエイターに向けたロゴデザインや素材、ビジュアル制作、フォント制作などを行っています。
 
 ご依頼やご相談があれば、お気軽にご連絡ください。
 `,
@@ -118,21 +126,75 @@ async function loadWorks() {
     const data = await res.json();
     const works = Array.isArray(data.works) ? data.works : [];
 
-    nav.innerHTML = works
-      .map(
-        (work, index) => `
-          <a class="work-item" href="${getWorkPath(work)}" data-index="${index}">
-            <div class="thumb">
-              <img src="${work.thumbnail}" alt="${work.title}">
-            </div>
-            <div class="meta">
-              <p class="category">${work.category || ""}</p>
-              <h2 class="title">${work.title || ""}</h2>
-            </div>
-          </a>
-        `,
-      )
-      .join("");
+    const allCategories = [
+      "全て",
+      ...new Set(works.flatMap((work) => parseCategories(work.category || ""))),
+    ];
+
+    let currentCategory = "全て";
+
+    function renderCategoryNav() {
+      categoryNav.innerHTML = allCategories
+        .map(
+          (category) => `
+            <button
+              class="category-filter${category === currentCategory ? " is-active" : ""}"
+              type="button"
+              data-category="${category}"
+            >
+              ${category}
+            </button>
+          `,
+        )
+        .join("");
+
+      categoryNav.querySelectorAll(".category-filter").forEach((button) => {
+        button.addEventListener("click", () => {
+          currentCategory = button.dataset.category;
+          renderCategoryNav();
+          renderWorksList();
+        });
+      });
+    }
+
+    function getFilteredWorks() {
+      if (currentCategory === "全て") return works;
+      return works.filter((work) =>
+        parseCategories(work.category || "").includes(currentCategory),
+      );
+    }
+
+    function renderWorksList() {
+      const filteredWorks = getFilteredWorks();
+
+      worksContainer.innerHTML = filteredWorks
+        .map((work) => {
+          const originalIndex = works.findIndex(
+            (item) => getWorkSlug(item) === getWorkSlug(work),
+          );
+
+          return `
+            <a class="work-item" href="${getWorkPath(work)}" data-index="${originalIndex}">
+              <div class="thumb">
+                <img src="${work.thumbnail}" alt="${work.title}">
+              </div>
+              <div class="meta">
+                <p class="category">${work.category || ""}</p>
+                <h2 class="title">${work.title || ""}</h2>
+              </div>
+            </a>
+          `;
+        })
+        .join("");
+
+      worksContainer.querySelectorAll(".work-item").forEach((item) => {
+        item.addEventListener("click", (event) => {
+          event.preventDefault();
+          const index = Number(item.dataset.index);
+          showWorkByIndex(index, true);
+        });
+      });
+    }
 
     function showDefault(push = true) {
       renderPrimary(defaultContent);
@@ -161,6 +223,9 @@ async function loadWorks() {
       }
     }
 
+    renderCategoryNav();
+    renderWorksList();
+
     const initialSlug = getSlugFromCurrentLocation();
     if (initialSlug) {
       const initialIndex = works.findIndex(
@@ -174,14 +239,6 @@ async function loadWorks() {
     } else {
       showDefault(false);
     }
-
-    nav.querySelectorAll(".work-item").forEach((item) => {
-      item.addEventListener("click", (event) => {
-        event.preventDefault();
-        const index = Number(item.dataset.index);
-        showWorkByIndex(index, true);
-      });
-    });
 
     window.addEventListener("popstate", () => {
       const slug = getSlugFromCurrentLocation();
