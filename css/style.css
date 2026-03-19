@@ -47,6 +47,16 @@ span {
   filter: url("#goo");
 }
 
+@media (max-width: 1024px) {
+  .cursor {
+    display: none;
+  }
+
+  * {
+    cursor: auto !important;
+  }
+}
+
 .cursor-dot {
   position: absolute;
   width: 12px;
