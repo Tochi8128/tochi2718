@@ -40,14 +40,14 @@
         <p class="copy">クリエイターのためのデザイン</p>
       </div>
       <div class="header-right">
-        <a href="../">top</a>
+        <a href="../">Top</a>
         <a target="_blank" href="https://tochi2718.booth.pm/">BOOTH</a>
         <a target="_blank" href="https://x.com/tochi2718">X</a>
-        <a href="../contact/">contact</a>
+        <a href="../contact/">Contact</a>
       </div>
     </header>
     <main class="phone-form">
-      <h1 class="phone-form__title">ご依頼フォーム</h1>
+      <h1 class="phone-form__title">Contact</h1>
       <button
         onclick="window.open('https://x.com/tochi2718')"
         target="_blank"
@@ -69,26 +69,39 @@
             <span class="field__label"
               >お名前<span class="asterisk">*</span></span
             >
-            <input class="field__input" name="name" type="text" required />
+            <input
+              class="field__input"
+              name="name"
+              type="text"
+              placeholder="例：倒置"
+              required
+            />
           </label>
 
           <label class="field">
             <span class="field__label"
               >メール<span class="asterisk">*</span></span
             >
-            <input class="field__input" name="email" type="email" required />
+            <input
+              class="field__input"
+              name="email"
+              type="email"
+              placeholder="例：〜〜〜@gmail.com"
+              required
+            />
           </label>
 
           <label class="field">
             <span class="field__label"
-              >種別<span class="asterisk">*</span></span
+              >種類<span class="asterisk">*</span></span
             >
             <select class="field__select" name="type" required>
               <option value="">選択してください</option>
-              <option value="logo">ロゴ</option>
-              <option value="kv">キービジュアル</option>
-              <option value="web">Web</option>
-              <option value="print">紙もの</option>
+              <option value="logo">ロゴデザイン</option>
+              <option value="kv">
+                グラフィックデザイン（名刺やサムネイルなど）
+              </option>
+              <option value="web">Webデザイン</option>
               <option value="other">その他</option>
             </select>
           </label>
@@ -101,6 +114,7 @@
                 name="budget"
                 type="text"
                 inputmode="numeric"
+                placeholder="例：〜〜〜円"
               />
             </label>
 
@@ -110,7 +124,7 @@
                 class="field__input"
                 name="deadline"
                 type="text"
-                placeholder="例：2月末"
+                placeholder="例：20XX年XX月"
               />
             </label>
           </div>
@@ -123,6 +137,7 @@
               class="field__textarea"
               name="message"
               rows="5"
+              placeholder="例：〇〇という企画のロゴデザインをお願いしたい"
               required
             ></textarea>
           </label>
@@ -151,7 +166,7 @@
         <section class="done" id="donePanel" aria-live="polite">
           <h2 class="confirm__title">送信しました</h2>
           <p class="done__text">内容を確認のうえ、ご連絡します。</p>
-          <button class="ghost" type="button" id="backToSiteBtn">戻る</button>
+          <a href="../" class="ghost" id="backToSiteBtn">戻る</a>
         </section>
       </form>
     </main>
