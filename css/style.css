@@ -30,41 +30,65 @@ span {
   color: var(--blue);
 }
 
-header {
+.header {
   padding: 15px 35px;
   border-bottom: var(--border);
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  gap: 20px;
 }
 
 @media screen and (max-width: 700px) {
-  header {
-    padding: 10px 15px;
+  .header {
+    padding: 20px 15px 15px;
   }
 }
 
-header .header-left,
-header .header-right {
+.header .copy-phone {
+  display: none;
+}
+
+@media screen and (max-width: 550px) {
+  .header .copy-phone {
+    display: block;
+  }
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.header-container .header-left,
+.header-container .header-right {
   display: flex;
   gap: 20px;
   align-items: center;
 }
 
 @media screen and (max-width: 700px) {
-  header .header-right {
+  .header-container .header-right {
     gap: 15px;
   }
 }
 
-header .header-left .logo {
+.header-container .header-left .logo {
   width: 80px;
   height: 27.6321px;
 }
 
-header button,
-header p,
-header a {
+@media screen and (max-width: 550px) {
+  .header-container .header-left .copy {
+    display: none;
+  }
+}
+
+.header button,
+.header p,
+.header a {
   color: var(--blue);
   font-size: 10pt;
   text-decoration: none;
@@ -283,7 +307,8 @@ main .secondary .nav {
 
 .category {
   font-size: 12px;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
+  margin-top: 12px;
 }
 
 .title {
