@@ -347,7 +347,9 @@ function animate() {
 
 let isHover = false;
 
-const hoverTargets = document.querySelectorAll("a, button, .logo");
+const hoverTargets = document.querySelectorAll(
+  "a, button, .logo, .category-filter",
+);
 
 hoverTargets.forEach((el) => {
   el.addEventListener("mouseenter", () => {
