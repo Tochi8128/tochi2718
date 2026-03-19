@@ -197,8 +197,13 @@ async function loadWorks() {
     }
 
     function showDefault(push = true) {
+      currentCategory = "全て";
+      renderCategoryNav();
+      renderWorksList();
+
       renderPrimary(defaultContent);
       setActiveWork(-1);
+
       if (push) {
         history.pushState({ type: "top" }, "", "/tochi2718/");
       }
@@ -221,6 +226,11 @@ async function loadWorks() {
           getWorkPath(work),
         );
       }
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     }
 
     renderCategoryNav();
