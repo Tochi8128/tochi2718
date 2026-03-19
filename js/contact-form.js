@@ -216,7 +216,7 @@ function animate() {
   let y = mouse.y;
 
   const target = isHover ? 1.8 : 1;
-  hoverScaleCurrent += (target - hoverScaleCurrent) * 0.15;
+  hoverScaleCurrent += (target - hoverScaleCurrent) * 0.2;
 
   dots.forEach((dot, index) => {
     dot.x = x;
@@ -238,29 +238,16 @@ function animate() {
 
 let isHover = false;
 
-const hoverTargets = document.querySelectorAll(
-  "a, button, .logo, .category-filter",
-);
+function isHoverableTarget(target) {
+  return !!target?.closest("a, button, .logo, .category-filter");
+}
 
-hoverTargets.forEach((el) => {
-  el.addEventListener("mouseenter", () => {
-    isHover = true;
-  });
-  el.addEventListener("mouseleave", () => {
-    isHover = false;
-  });
+document.addEventListener("mouseover", (e) => {
+  isHover = isHoverableTarget(e.target);
 });
 
-const inputs = document.querySelectorAll("input, textarea, select");
-
-inputs.forEach((el) => {
-  el.addEventListener("focus", () => {
-    cursor.style.display = "none";
-  });
-
-  el.addEventListener("blur", () => {
-    cursor.style.display = "block";
-  });
+document.addEventListener("mouseout", (e) => {
+  isHover = isHoverableTarget(e.relatedTarget);
 });
 
 animate();
