@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  cursor: none !important;
 }
 
 :root {
@@ -15,6 +16,7 @@ body {
   height: 100%;
   background: #f9f1ef;
   position: relative;
+  cursor: none;
 }
 
 h1,
@@ -28,6 +30,30 @@ span {
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 400;
   color: var(--blue);
+}
+
+.goo-filter {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  filter: url("#goo");
+}
+
+.cursor-dot {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--blue);
+  transform: translate(-50%, -50%);
 }
 
 .header {
@@ -216,16 +242,11 @@ main .secondary .nav {
 .category-filter {
   height: fit-content;
   padding: 6px 12px;
-  border: 1.7px solid var(--border);
+  border: 1.7px solid var(--blue);
   background: transparent;
   color: var(--blue);
-  cursor: pointer;
   font-size: 12px;
   border-radius: 3px;
-}
-
-.category-filter:hover {
-  border: var(--border);
 }
 
 .category-filter.is-active {
@@ -269,7 +290,6 @@ main .secondary .nav {
   padding: 0;
   width: 100%;
   text-align: left;
-  cursor: pointer;
   text-decoration: none;
   color: inherit;
 }
@@ -279,11 +299,6 @@ main .secondary .nav {
     display: block;
     width: 100%;
   }
-}
-
-.logo,
-.top-trigger {
-  cursor: pointer;
 }
 
 .thumb {

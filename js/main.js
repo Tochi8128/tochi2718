@@ -276,3 +276,86 @@ async function loadWorks() {
 }
 
 loadWorks();
+
+const cursor = document.getElementById("cursor");
+
+const DOT_COUNT = 10;
+const dots = [];
+
+const mouse = {
+  x: window.innerWidth / 2,
+  y: window.innerHeight / 2,
+};
+
+class Dot {
+  constructor(index) {
+    this.index = index;
+    this.x = mouse.x;
+    this.y = mouse.y;
+
+    this.baseScale = 1 - index * 0.06; // 通常サイズ
+    this.el = document.createElement("span");
+    this.el.className = "cursor-dot";
+    cursor.appendChild(this.el);
+  }
+
+  draw() {
+    const hoverScale = isHover ? 1.8 : 1; // ←ここがポイント
+    const scale = this.baseScale * hoverScale;
+
+    this.el.style.left = `${this.x}px`;
+    this.el.style.top = `${this.y}px`;
+    this.el.style.transform = `translate(-50%, -50%) scale(${scale})`;
+  }
+}
+
+for (let i = 0; i < DOT_COUNT; i++) {
+  dots.push(new Dot(i));
+}
+
+window.addEventListener("mousemove", (e) => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+});
+
+let hoverScaleCurrent = 1;
+
+function animate() {
+  let x = mouse.x;
+  let y = mouse.y;
+
+  const target = isHover ? 1.8 : 1;
+  hoverScaleCurrent += (target - hoverScaleCurrent) * 0.15;
+
+  dots.forEach((dot, index) => {
+    dot.x = x;
+    dot.y = y;
+
+    const scale = dot.baseScale * hoverScaleCurrent;
+
+    dot.el.style.left = `${dot.x}px`;
+    dot.el.style.top = `${dot.y}px`;
+    dot.el.style.transform = `translate(-50%, -50%) scale(${scale})`;
+
+    const nextDot = dots[index + 1] || dots[0];
+    x += (nextDot.x - x) * 0.1;
+    y += (nextDot.y - y) * 0.1;
+  });
+
+  requestAnimationFrame(animate);
+}
+
+let isHover = false;
+
+const hoverTargets = document.querySelectorAll("a, button, .logo");
+
+hoverTargets.forEach((el) => {
+  el.addEventListener("mouseenter", () => {
+    isHover = true;
+  });
+  el.addEventListener("mouseleave", () => {
+    isHover = false;
+  });
+});
+
+animate();
