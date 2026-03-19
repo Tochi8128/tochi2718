@@ -36,7 +36,7 @@ function getRequestedPath() {
 
 function getSlugFromCurrentLocation() {
   const path = getRequestedPath();
-  const match = path.match(/^\/tochi2718\/works\/([^/]+)$/);
+  const match = path.match(/^\/works\/([^/]+)$/);
   return match ? decodeURIComponent(match[1]) : null;
 }
 
