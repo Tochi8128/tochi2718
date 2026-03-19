@@ -48,6 +48,10 @@ span {
   transform: translateZ(0);
 }
 
+.safari .cursor {
+  filter: none;
+}
+
 @media (hover: none), (pointer: coarse), (max-width: 1024px) {
   .cursor {
     display: none !important;

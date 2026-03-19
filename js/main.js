@@ -286,6 +286,12 @@ async function loadWorks() {
 
 loadWorks();
 
+const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+if (isSafari) {
+  document.documentElement.classList.add("safari");
+}
+
 const isTouchDevice = window.matchMedia(
   "(hover: none), (pointer: coarse)",
 ).matches;
