@@ -201,12 +201,12 @@ async function loadWorks() {
       renderCategoryNav();
       renderWorksList();
 
-      renderPrimary(defaultContent);
-      setActiveWork(-1);
-
       if (push) {
         history.pushState({ type: "top" }, "", "/");
       }
+
+      renderPrimary(defaultContent);
+      setActiveWork(-1);
     }
 
     function showWorkByIndex(index, push = true) {
