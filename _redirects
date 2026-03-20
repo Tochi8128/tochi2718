@@ -1,0 +1,2 @@
+/works /?path=/works 302
+/works/* /?path=/works/:splat 302
