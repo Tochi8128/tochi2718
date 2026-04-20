@@ -2,7 +2,7 @@ backend:
   name: github
   repo: tochi8128/tochi2718
   branch: main
-  base_url: https://tochi2718.toch2718.workers.dev
+  base_url: https://tochi-portfolio-old.toch2718.workers.dev
   auth_endpoint: /auth
 
 media_folder: "uploads/works"
